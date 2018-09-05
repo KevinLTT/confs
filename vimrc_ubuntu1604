@@ -1,0 +1,174 @@
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" 启用vundle来管理vim插件
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" 安装插件写在这之后
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+" quick comment
+Plugin 'scrooloose/nerdcommenter'
+
+" auto complete
+Plugin 'Valloric/YouCompleteMe'
+" YCM hotkey
+nnoremap <leader>gl :YcmCompleter GoToDeclaration<CR>
+nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
+nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
+let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py'
+let g:ycm_confirm_extra_conf=0
+let g:ycm_autoclose_preview_window_after_completion=1
+let g:ycm_autoclose_preview_window_after_insertion=1
+let g:ycm_seed_identifiers_with_syntax=1
+let g:ycm_min_num_of_chars_for_completion=2
+"let g:ycm_path_to_python_interpreter='/usr/bin/python'
+"let g:loaded_youcompleteme = 1
+
+" smart bracket
+Plugin 'jiangmiao/auto-pairs'
+let g:AutoPairsFlyMode=1
+let g:AutoPairsShortcutBackInsert = '<C-t>'
+
+" file tree
+Plugin 'scrooloose/nerdtree'
+autocmd vimenter * NERDTree | wincmd p
+
+" powerline
+Plugin 'Lokaltog/vim-powerline'
+
+" surround
+Plugin 'tpope/vim-surround'
+
+" auto standardize the code
+Plugin 'tell-k/vim-autopep8'
+let g:autopep8_disable_show_diff=1
+
+" indent line
+Plugin 'Yggdroot/indentLine'
+let g:indentLine_char='┆'
+let g:indentLine_enabled = 1
+
+" rename
+Plugin 'danro/rename.vim'
+
+" latex plugin
+Plugin 'lervag/vimtex'
+let g:vimtex_view_method = 'zathura'
+let g:tex_conceal = ""
+let g:tex_flavor = "latex"
+
+" snippets
+Plugin 'SirVer/ultisnips'
+let g:UltiSnipsSnippetDirectories = ['/home/kevin/.vim/UltiSnips', 'UltiSnips']
+let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="horizontal"
+
+" 安装插件写在这之前
+call vundle#end()            " required
+filetype plugin on    " required
+
+" 常用命令
+" :PluginList       - 查看已经安装的插件
+" :PluginInstall    - 安装插件
+" :PluginUpdate     - 更新插件
+" :PluginSearch     - 搜索插件，例如 :PluginSearch xml就能搜到xml相关的插件
+" :PluginClean      - 删除插件，把安装插件对应行删除，然后执行这个命令即可
+
+" h: vundle         - 获取帮助
+
+" vundle的配置到此结束，下面是你自己的配置
+
+" 编码
+set fileencodings=ucs-bom,utf-8,utf-16,gbk,big5,gb18030,latin1
+
+" press F5 to run python
+map <F5> :Autopep8<CR> :w<CR> :call RunPython()<CR>
+function RunPython()
+    let mp = &makeprg
+    let ef = &errorformat
+    let exeFile = expand("%:t")
+    setlocal makeprg=python\ -u
+    set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
+    silent make %
+    copen
+    let &makeprg = mp
+    let &errorformat = ef
+endfunction
+
+
+" row number and syntax
+set number
+set ruler
+syntax enable
+syntax on
+set background=dark
+let g:molokai_original=1
+colorscheme molokai
+set splitbelow
+set mouse-=a
+
+" tab related
+set ts=4 
+set sw=4
+set expandtab 
+set sts=4
+set autoindent 
+
+" turn off auto comment
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
+"##### auto fcitx  ###########
+inoremap <C-c> <Esc>
+
+let g:input_toggle = 0
+function! Fcitx2en()
+   let s:input_status = system("fcitx-remote")
+   if s:input_status == 2
+      let g:input_toggle = 1
+      let l:a = system("fcitx-remote -c")
+   endif
+endfunction
+
+function! Fcitx2zh()
+   let s:input_status = system("fcitx-remote")
+   if s:input_status != 2 && g:input_toggle == 1
+      let l:a = system("fcitx-remote -o")
+      let g:input_toggle = 0
+   endif
+endfunction
+
+set ttimeoutlen=5
+"退出插入模式
+autocmd InsertLeave * call Fcitx2en()
+"进入插入模式
+autocmd InsertEnter * call Fcitx2zh()
+""##### auto fcitx end ######
+
+"" set timeoutlen=10
+"autocmd InsertLeave * call Fcitx2en()
+" autocmd InsertEnter * call Fcitx2zh()
+
+" set default shell as zsh
+set shell=/bin/zsh
+
+" Nerdtree automatically
+map <C-n> :NERDTreeToggle<CR>
+"autocmd VimEnter * NERDTree
+"wincmd w
+"autocmd VimEnter * wincmd w
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+" setup for powerline
+set laststatus=2
+set t_Co=256
+let g:Powerline_symbols= 'unicode'
+set encoding=utf8
+
+noremap <C-p> "+p
+noremap <C-y> "+y

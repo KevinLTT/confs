@@ -1,0 +1,23 @@
+global !p
+import time
+def get_current_time():
+	currentTime = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) 
+	return currentTime
+endglobal
+
+snippet bloghead "blog head" b
+---
+layout: post
+title: "$1"
+data: `!p snip.rv = get_current_time()` +0800
+author: "KevinLT"
+tags:
+	- ${2:mass}
+---
+endsnippet
+
+snippet code "code environment in markdown" b
+\`\`\`${1:bash}
+$2
+\`\`\`
+endsnippet
