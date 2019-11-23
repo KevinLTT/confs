@@ -1,15 +1,43 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+# SMPL
+SMPL_LOCATION=/home/kevin/Project/SMPL/smpl
+export PYTHONPATH=$PYTHONPATH:$SMPL_LOCATION
+
+# anaconda
+export PATH="/opt/anaconda/bin:$PATH"
+
+# editor
+export EDITOR='vim'
+export VISUAL='vim'
+
+# android-studio
+export PATH="/opt/android-sdk/tools:$PATH"
+export PATH="/opt/android-sdk/platform-tools:$PATH"
+
+# python
+export PYTHONPATH="$PYTHONPATH:/home/kevin/Project/FP16/models-master"
+
+# proxy
+#export HTTPS_proxy="http://127.0.0.1:1080"
+
+# Unreal
+export UE4_ROOT=~/data/UnrealEngine
+
+# gem
+export PATH="/home/kevin/.gem/ruby/2.5.0/bin:$PATH"
+
 # tldr
 export PATH="/home/kevin/bin:$PATH"
 
 # CUDA
-# export PATH="/usr/local/cuda/bin:$PATH"
-# export LD_LIBRARY_PATH="/usr/local/cuda/lib64:$LD_LIBRARY_PATH"
+export PATH="/usr/local/cuda/bin:$PATH"
+export LD_LIBRARY_PATH="/usr/local/cuda/lib64:$LD_LIBRARY_PATH"
+export LD_LIBRARY_PATH=${LD_LIBRARY_PATH:+${LD_LIBRARY_PATH}:}/usr/local/cuda/extras/CUPTI/lib64
 
 # anaconda3
-#export PATH="/opt/anaconda/bin/activate:$PATH"
+#export PATH="/opt/anaconda/bin:$PATH"
 #export LD_LIBRARY_PATH="/home/kevin/anaconda3/lib:$LD_LIBRARY_PATH"
 
 # anaconda2
@@ -29,8 +57,23 @@ alias 'gita'='git add .'
 alias 'gitc'='proxychains git clone'
 alias 'gitd'='proxychains git pull'
 alias 'gitp'='proxychains git push'
+alias grep='grep --color=auto'
+alias sc='scrot -bs ~/Pictures/%b%d::%H%M%S.png'
+alias vim='PATH=/usr/bin vim --servername VIM'
+alias pacss='pacman -Ss'
+alias pacs='sudo pacman -S'
+alias yaoss='yaourt -Ss'
+alias yaos='yaourt -S'
+alias kil='sudo kill -9'
+alias nvs='watch -n 1 nvidia-smi'
+alias yd='python /home/kevin/SDK/ydcv/src/ydcv.py'
+alias sap='source activate pytorch'
+alias sab='source activate base'
+alias sat='source activate tensorflow'
+alias xs='xsel -ib'
+alias gittree='git log --oneline --decorate --graph --all'
 
-# color man
+# color
 man() {
     LESS_TERMCAP_md=$'\e[01;31m' \
     LESS_TERMCAP_me=$'\e[0m' \
@@ -40,6 +83,9 @@ man() {
     LESS_TERMCAP_us=$'\e[01;32m' \
     command man "$@"
 }
+
+# editor
+#export EDITOR=vim
 
 # autojump activation
 . /usr/share/autojump/autojump.zsh
@@ -51,6 +97,7 @@ export ZSH=/home/kevin/.oh-my-zsh
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="robbyrussell"
+#ZSH_THEME="spaceship"
 
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random

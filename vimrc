@@ -24,8 +24,9 @@ let g:ycm_autoclose_preview_window_after_completion=1
 let g:ycm_autoclose_preview_window_after_insertion=1
 let g:ycm_seed_identifiers_with_syntax=1
 let g:ycm_min_num_of_chars_for_completion=2
-"let g:ycm_path_to_python_interpreter='/usr/bin/python'
-"let g:loaded_youcompleteme = 1
+let g:ycm_path_to_python_interpreter='/usr/bin/python'
+"let g:loaded_youcompleteme=1
+let g:ycm_show_diagnostics_ui=0
 
 " smart bracket
 Plugin 'jiangmiao/auto-pairs'
@@ -49,16 +50,20 @@ let g:autopep8_disable_show_diff=1
 " indent line
 Plugin 'Yggdroot/indentLine'
 let g:indentLine_char='┆'
-let g:indentLine_enabled = 1
+let g:indentLine_enabled = 0
+" indentLine will overwrite conceallevel
+" let g:indentLine_setConceal = 0
 
 " rename
 Plugin 'danro/rename.vim'
 
 " latex plugin
+set conceallevel=0
 Plugin 'lervag/vimtex'
 let g:vimtex_view_method = 'zathura'
-let g:tex_conceal = ""
 let g:tex_flavor = "latex"
+"let g:vimtex_quickfix_mode=0
+let g:tex_conceal = 'abdmg'
 
 " snippets
 Plugin 'SirVer/ultisnips'

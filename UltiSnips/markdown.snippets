@@ -9,7 +9,7 @@ snippet bloghead "blog head" b
 ---
 layout: post
 title: "$1"
-data: `!p snip.rv = get_current_time()` +0800
+date: `!p snip.rv = get_current_time()` +0800
 author: "KevinLT"
 tags:
 	- ${2:mass}
@@ -20,4 +20,8 @@ snippet code "code environment in markdown" b
 \`\`\`${1:bash}
 $2
 \`\`\`
+endsnippet
+
+snippet figure "figure in blog" b
+![$1]({{"/img/in-post/$2"}})
 endsnippet
